@@ -1,0 +1,15 @@
+<%= flash[:notice] %>
+
+<%= render 'users/list',user: @user, book: @books %>
+
+<h1>Book detail</h1>
+
+<div>
+  <p><%= @book.user.name %></p>
+  <p><%= @book.title %></p>
+  <p><%= @book.body %></p>
+  <% if @book.user == current_user %>
+    <%= link_to"Edit",edit_book_path(@book) %>
+    <%= link_to"Destroy",book_path(@book), method: :delete %>
+  <% end %>
+</div>
