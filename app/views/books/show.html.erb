@@ -1,15 +1,49 @@
 <%= flash[:notice] %>
 
+<div class="container">
+<div class="row">
+
+
+<div class="col-md-3">
 <%= render 'users/list',user: @user, book: @books %>
-
-<h1>Book detail</h1>
-
-<div>
-  <p><%= @book.user.name %></p>
-  <p><%= @book.title %></p>
-  <p><%= @book.body %></p>
-  <% if @book.user == current_user %>
-    <%= link_to"Edit",edit_book_path(@book) %>
-    <%= link_to"Destroy",book_path(@book), method: :delete %>
-  <% end %>
 </div>
+
+<div class="col-md-8 offset-md-1">
+<h1>Book detail</h1>
+  <table class="table">
+
+    <tbody>
+      <tr>
+        <td>
+          <%= link_to user_path(@user.id) do %>
+          <%= image_tag @book.user.get_profile_image(100,100) %><br>
+          <%= @book.user.name %>
+          <% end %>
+        </td>
+        <td>
+          <%= @book.title %>
+        </td>
+        <td>
+          <%= @book.body %>
+        </td>
+        <% if @book.user == current_user %>
+        <td>
+          <%= link_to edit_book_path(@book) do %>
+          <div class="btn btn-sm btn-success">Edit</div>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to book_path(@book), method: :delete do %>
+          <div class="btn btn-sm btn-danger">Destroy</div>
+          <% end %>
+        </td>
+        <% end %>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>
+</div>
+
+
+
